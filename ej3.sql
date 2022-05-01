@@ -52,5 +52,44 @@ HAVING AVG(cajas.valor) > 150;
 SELECT cajas.num_referencia, almacenes.lugar
 FROM cajas
 INNER JOIN almacenes
+ON almacenes.codigo = cajas.almacen;
+/*3.8*/
+SELECT almacenes.lugar, COUNT(cajas.num_referencia)
+FROM cajas
+INNER JOIN almacenes
 ON almacenes.codigo = cajas.almacen
+GROUP BY  almacenes.lugar;
+/*3.9 No me sale preguntar en clase*/
+
+/*3.10*/
+INSERT INTO almacenes(lugar,capacidad) VALUES
+("Bilbao",2);
+INSERT INTO cajas(num_referencia,contenido,valor,almacen) VALUES
+("MONTA","MONTADITOS",20,6),
+("BITXO","BITXOS",30,6),
+("QUPRE","QUESOS PRESIDENT",15,6);
+SELECT lugar,cajas.num_referencia
+FROM almacenes
+INNER JOIN cajas
+ON codigo = cajas.almacen
+WHERE lugar LIKE "Bilbao";
+/*3.11*/
+INSERT INTO almacenes(lugar,capacidad) VALUES
+("Barcelona-Sants",3);
+/*3.12*/
+INSERT INTO cajas(num_referencia,contenido,valor,almacen) VALUES
+("H5RT","Papel",200,2);
+/*3.13*/
+SET SQL_SAFE_UPDATES = 0;
+UPDATE cajas
+SET valor = valor * 0.85;
+/*3.14 no me sale preguntar en clase*/
+SELECT *
+FROM cajas
+WHERE valor > (SELECT AVG(valor) FROM cajas);
+/*3.15*/
+DELETE 
+FROM cajas
+WHERE valor < 100;
+/*3.16 necesito preguntar como se hace el de saturados*/
 
